@@ -15,8 +15,8 @@ batch_file=cp2k_batch
 
 # Generate the input file by varing the a/c parameters
 for ii in {-10..10..1} ; do
-    aa=${expr ${reference_a}+${interval}*$ii | bc}
-    cc=${expr ${aa}*${ratio} | bc}
+    aa=$(expr ${reference_a}+${interval}*${ii} | bc)
+    cc=$(expr ${aa}*${ratio} | bc)
     work_dir=a_${aa}
     if [ ! -d $work_dir ] ; then
        mkdir $work_dir
