@@ -50,8 +50,10 @@ parser.add_argument('--fermi', action="store", default=0, dest="Ef", type=float,
                     help='Fermi energy. (Default=0)')
 parser.add_argument('-k', '--kpoints', action="store",type=str, dest='kpts', default=None,
                     help='kpoint path. (e.g. GMKG)')
+parser.add_argument('-s', '--size', nargs=2, action="store", type=float, default=(3.0,4.0), dest="figsize",
+                    help='figure size of the output plot.')
 parser.add_argument('--ylim', nargs=2, action="store", default=(-3,3), dest="ylim",
-                    help='energy range of the band plot')
+                    help='energy range of the band plot.')
 parser.add_argument('-o','--output', action="store", default="band.png", dest="bandimage",
                     help="Filename for band image.")
 parser.add_argument('-quiet', action="store_true", default=False, dest="quiet",
@@ -154,7 +156,7 @@ else:
 #----------------------------
 if args.plot == True:
     import matplotlib.pyplot as plt
-    width, height = 3.0, 4.0 #args.figsize
+    width, height = args.figsize
     ymin, ymax = args.ylim
     dpi = 300 #args.dpi
     if args.spin == 2:
@@ -192,7 +194,7 @@ if args.plot == True:
         ax.set_ylim(ymin, ymax)
         ax.set_xlim(np.array(path).min(), np.array(path).max())
         plt.tight_layout(pad=0.20)
-        plt.savefig("band.png", dpi=dpi)
+        plt.savefig(args.bandimage, dpi=dpi)
 
     else:
         fig = plt.figure()
@@ -227,12 +229,13 @@ if args.plot == True:
         ax.set_ylim(ymin, ymax)
         ax.set_xlim(np.array(path).min(), np.array(path).max())
         plt.tight_layout(pad=0.20)
-        plt.savefig("band.png", dpi=dpi)
+        plt.savefig(args.bandimage, dpi=dpi)
 
 # show plot
+#----------------------------
 if not args.quiet:
     from subprocess import call
     # show plot in iterm2
-    call(['/Users/chengcheng_xiao/.iterm2/imgcat', args.bandimage])
+    call(['/Users/chengcheng_xiao/.iterm2/imgcat ', args.bandimage])
     # show plot using feh
     #call(['feh', '-xdF', opts.bandimage])
