@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser(description="Building Mg surface with adsorbate
 parser.add_argument('-OH', action='store', dest='OH_numbers', default=0, help='set the number of hydroxyls')
 parser.add_argument('-O', action='store', dest='O_numbers', default=0, help='set the number of oxygens')
 parser.add_argument('-H', action='store', dest='H_numbers', default=0, help='set the number of hydrogens')
-parser.add_argument('-i', action='store', dest='interstitials', help='set the interstitial type')
+parser.add_argument('-i', action='store', dest='interstitials', default='none', help='set the interstitial type')
 parser.add_argument('-t', action='store', dest='type', help='cp2k or qe')
 args = parser.parse_args()
 
